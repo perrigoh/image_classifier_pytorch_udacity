@@ -1,8 +1,8 @@
 # /aipnd-project/classifier.py - Completed
 
-# PROGRAMMER: Perri Goh Meng Hsuan
+# PROGRAMMER: Perri Goh
 # DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 
+# REVISED DATE: 26 Oct 2022
 #
 
 # Imports python modules
@@ -14,7 +14,7 @@ from torchvision import datasets, transforms, models
 from collections import OrderedDict
 
 
-def classifier(arch, learning_rate, hidden_layer, gpu):
+def classifier(arch, learning_rate, hidden_layer):
     """
     Build a image classification model using a pre-trained convolutional neural 
     network (CNN) with feature parameters are frozen. here are 3 options of 
@@ -36,11 +36,8 @@ def classifier(arch, learning_rate, hidden_layer, gpu):
     4. device: The type of processing unit
     """ 
 
-    # processing unit selection
-    if gpu == 'gpu':
-        device = torch.device('cuda')
-    else:
-        device = torch.device('cpu')
+    # Use GPU if it's available
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # model selection
     if arch == 'alexnet':

@@ -1,8 +1,8 @@
 # /aipnd-project/get_arg.py - Completed
 # 
-# PROGRAMMER: Perri Goh Meng Hsuan
+# PROGRAMMER: Perri Goh
 # DATE CREATED: 4 Oct 2022                                  
-# REVISED DATE: 11 Oct 2022
+# REVISED DATE: 26 Oct 2022
 # 
 
 # Imports python module
@@ -23,9 +23,8 @@ def get_args():
     3. Learning Rate as --learning_rate with default value '0.01'
     4. Hidden Units as --hidden_units with default value '512'
     5. Epochs as --epochs with default value '20'
-    6. GPU as --gpu with default value 'gpu'
-    7. Top K as --top_k with default value '3'
-    8. Mapping of categories to real names as --category_names with default 
+    6. Top K as --top_k with default value '3'
+    7. Mapping of categories to real names as --category_names with default 
        value 'cat_to_name.json'
     This function returns these arguments as an ArgumentParser object.
     Parameters:
@@ -51,9 +50,6 @@ def get_args():
                     help='Set hyperparameters - hidden_units type=int range 102 - 9216')
     parser.add_argument('--epochs', dest='epochs', type=int, default='1', 
                     help='Set hyperparameters - epochs')
-    # Option: python train.py data_dir --gpu
-    parser.add_argument('--gpu', dest='gpu', type=str, default='gpu', 
-                    help='Select gpu as processing units')
 
     # arguments for predict.py
     # Option: python predict.py input checkpoint --topk_3
@@ -66,15 +62,4 @@ def get_args():
 
     return parser.parse_args()
 
-
-# not sure where to place this, to be explore after project submission.
-# in_args = parser.parse_args()
-# print('save_dir       = {!r}'.format(in_args.save_dir))
-# print('arch           = {!r}'.format(in_args.arch))
-# print('learning_rate  = {!r}'.format(in_args.learning_rate))
-# print('hidden_units   = {!r}'.format(in_args.hidden_units))
-# print('epochs         = {!r}'.format(in_args.epochs))
-# print('gpu            = {!r}'.format(in_args.gpu))
-# print('topk          = {!r}'.format(in_args.topk))
-# print('category_names = {!r}'.format(in_args.category_names))
 

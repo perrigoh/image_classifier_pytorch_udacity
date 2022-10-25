@@ -1,8 +1,8 @@
 # /aipnd-project/train.py - Completed
 
-# PROGRAMMER: Perri Goh Meng Hsuan
+# PROGRAMMER: Perri Goh
 # DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 
+# REVISED DATE: 26 Oct 2022
 # 
 
 
@@ -45,7 +45,7 @@ def main():
        
     # Build model
     print('Building model...')
-    model, criterion, optimizer, device = classifier(in_arg.arch, in_arg.learning_rate, in_arg.hidden_units, in_arg.gpu)
+    model, criterion, optimizer, device = classifier(in_arg.arch, in_arg.learning_rate, in_arg.hidden_units)
     
     # load transformed datasets
     print('Transforming datatsets...')
