@@ -8188,3 +8188,7 @@ flowers/valid/99/image_07873.jpg
 flowers/valid/99/image_07875.jpg
 flowers/valid/99/image_08063.jpg
 checkpoint.pth
+__pycache__/classifier.cpython-37.pyc
+__pycache__/get_args.cpython-37.pyc
+__pycache__/process_dataset.cpython-37.pyc
+run_py_file.ipynb
