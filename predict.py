@@ -1,8 +1,8 @@
 # /aipnd-project/predict.py Completed
 
-# PROGRAMMER: Perri Goh Meng Hsuan
+# PROGRAMMER: Perri Goh
 # DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 13 Oct 2022
+# REVISED DATE: 26 Oct 2022
 #
 
 # Imports python modules
@@ -26,7 +26,7 @@ from process_dataset import load_cat_name
 in_arg = get_args() 
 
 
-def predict(checkpoint, gpu, topk, category_names):
+def predict(checkpoint, gpu, topk=3, category_names):
     """ 
     Predict the class (or classes) of an image using a trained deep learning model.
     Parameters:    

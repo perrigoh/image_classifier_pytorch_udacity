@@ -14,7 +14,7 @@ from torchvision import datasets, transforms, models
 from collections import OrderedDict
 
 
-def classifier(arch, learning_rate, hidden_layer):
+def classifier(arch='vgg13', learning_rate=0.01, hidden_layer=512):
     """
     Build a image classification model using a pre-trained convolutional neural 
     network (CNN) with feature parameters are frozen. here are 3 options of 
@@ -24,16 +24,16 @@ def classifier(arch, learning_rate, hidden_layer):
     optimizer = optim.Adam. Activation function hidden layer = ReLU and output
     layer = Softmax.
     Parameters:    
-    1. arch (str): The CNN architecture
-    2. learning_rate(float): The a tuning parameter 
-    3. hidden_layer (int): The number of hidden units
-    4. gpu (str): The type of processing unit
-
+    1. arch (str): The CNN architecture with default value 'vgg13'
+    2. learning_rate(float): The a tuning parameter default value '0.01'
+    3. hidden_layer (int): The number of hidden units default value '512'
+    
     Returns:
     1. model: The built classifier model
     2. criterion: nn.NLLLoss
     3. optimizer: optim.Adam
     4. device: The type of processing unit
+    5. arch: The CNN architecture
     """ 
 
     # Use GPU if it's available
@@ -72,6 +72,6 @@ def classifier(arch, learning_rate, hidden_layer):
     
     model.to(device)
     
-    return model, criterion, optimizer, device
+    return model, criterion, optimizer, device, arch
 
 

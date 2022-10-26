@@ -53,7 +53,7 @@ def main():
 
     # train model
     print('Training begin...') 
-    for epoch in range(epochs):
+    for epoch in range(epochs=1):
         for inputs, labels in trainloader:
             # Move input and label tensors to the default device
             inputs, labels = inputs.to(device), labels.to(device)
