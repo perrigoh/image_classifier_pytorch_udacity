@@ -50,7 +50,7 @@ def classifier(arch='vgg13', learning_rate=0.01, hidden_layer=512):
         input_layer = 25088
         output_layer = 102
 
-    else:
+    elif arch == 'vgg13':
         model = models.vgg13(pretrained=True)
         input_layer = 25088
         output_layer = 102
