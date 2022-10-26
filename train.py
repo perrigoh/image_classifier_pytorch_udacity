@@ -44,7 +44,7 @@ def main():
        
     # Build model
     print('Building model...')
-    model, criterion, optimizer, device = classifier(in_arg.arch, in_arg.learning_rate, in_arg.hidden_units)
+    model, criterion, optimizer, device, arch = classifier(in_arg.arch, in_arg.learning_rate, in_arg.hidden_units)
     
     # load transformed datasets
     print('Transforming datatsets...')
@@ -103,6 +103,7 @@ def main():
                 'input_size': model.classifier[0].in_features,
                 'output_size': model.classifier[3].out_features,           
                 'hidden_layer': model.classifier[0].out_features,
+                'arch': arch,
                 'epochs': epochs,
                 'class_to_idx': model.class_to_idx}
 

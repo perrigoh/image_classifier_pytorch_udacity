@@ -45,8 +45,9 @@ def predict(checkpoint, topk=3, category_names):
     checkpoint = torch.load(checkpoint)
     input_layer = checkpoint['input_size']
     hidden_layer = checkpoint['hidden_layer']
-    output_layer = checkpoint['output_size']                          
-    model = models.vgg13(pretrained=True)
+    output_layer = checkpoint['output_size']
+    arch = checkpoint['arch']                          
+    model = models.arch(pretrained=True)
     for param in model.parameters():
         param.requires_grad = False
     model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
