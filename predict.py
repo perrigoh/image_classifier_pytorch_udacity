@@ -26,25 +26,21 @@ from process_dataset import load_cat_name
 in_arg = get_args() 
 
 
-def predict(checkpoint, gpu, topk=3, category_names):
+def predict(checkpoint, topk=3, category_names):
     """ 
     Predict the class (or classes) of an image using a trained deep learning model.
     Parameters:    
     1. save_dir (str): The directory where the model will be saved
-    2. gpu (str): The type of processing unit
-    3. topk (int): The number highest ranking of the classes
-    4. category_names (str): A json file that store the category names.      
+    2. topk (int): The number highest ranking of the classes
+    3. category_names (str): A json file that store the category names.      
     Returns:
     None - simply printing results.
     """    
     print('Loading model...')
     # load and rebuild model   
     
-    # processing unit selection
-    if gpu == 'gpu':
-        device = torch.device('cuda')
-    else:
-        device = torch.device('cpu')
+    # Use GPU if it's available
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
           
     checkpoint = torch.load(checkpoint)
     input_layer = checkpoint['input_size']
@@ -96,4 +92,4 @@ def predict(checkpoint, gpu, topk=3, category_names):
     
     return
 
-predict(in_arg.save_dir, in_arg.gpu, in_arg.topk, in_arg.category_names)
+predict(in_arg.save_dir, in_arg.topk, in_arg.category_names)

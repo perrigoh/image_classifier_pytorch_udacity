@@ -29,8 +29,7 @@ def main():
     1. arch (str): The CNN architecture
     2. learning_rate(float): The a tuning parameter 
     3. hidden_layer (int): The number of hidden units
-    4. epochs (int): Number of iterations
-    5. gpu (str): The type of processing unit     
+    4. epochs (int): Number of iterations     
     Returns:
     None - simply printing results.
     """
