@@ -67,9 +67,9 @@ def tf_loader():
     test_data = datasets.ImageFolder(test_dir, transform=test_transforms)
 
     # using the image datasets and the trainforms, define the dataloaders
-    trainloader = torch.utils.data.DataLoader(train_data, batch_size=64, shuffle=True)
-    validloader = torch.utils.data.DataLoader(valid_data, batch_size=64)
-    testloader = torch.utils.data.DataLoader(test_data, batch_size=64)
+    trainloader = torch.utils.data.DataLoader(train_data, batch_size=32, shuffle=True)
+    validloader = torch.utils.data.DataLoader(valid_data, batch_size=32)
+    testloader = torch.utils.data.DataLoader(test_data, batch_size=32)
     
     return train_data, valid_data, test_data, trainloader, validloader, testloader
 
