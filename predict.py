@@ -26,7 +26,7 @@ from process_dataset import load_cat_name
 in_arg = get_args() 
 
 
-def predict(checkpoint, topk=3, category_names):
+def predict(checkpoint='checkpoint.pth', topk=3, category_names='cat_to_name.json'):
     """ 
     Predict the class (or classes) of an image using a trained deep learning model.
     Parameters:    
@@ -60,7 +60,7 @@ def predict(checkpoint, topk=3, category_names):
     
     model.to(device)
     # load cat_to_name.json for mapping categories to actual flowers name
-    cat_to_name = load_cat_name(in_arg.category_names)
+    cat_to_name = load_cat_name(category_names)
             
     print('Predicting in process...')
     
