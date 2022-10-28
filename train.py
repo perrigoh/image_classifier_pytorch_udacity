@@ -2,7 +2,7 @@
 
 # PROGRAMMER: Perri Goh
 # DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 26 Oct 2022
+# REVISED DATE: 28 Oct 2022
 # 
 
 
@@ -18,41 +18,81 @@ from time import time
 import numpy
 
 from get_args import get_args
-from classifier import classifier
 from process_dataset import tf_loader
 
+in_arg = get_args() 
 
-def main():
-    """ 
-    Train the classifier model.
+
+def train(arch='vgg13', hidden_layer=512, learning_rate=0.01, epochs=1):
+    """
+    Build a image classification model using a pre-trained convolutional neural 
+    network (CNN) with feature parameters are frozen. here are 3 options of 
+    pre-trained model to choose from, Alexnet, VGG 16, VGG 13. Train the classifier 
+    using customised parameters. The nn.sequential is a subclass of nn.module. Number
+    of hidden layer = 1 , criterion = nn.NLLLoss (negative log likelihood loss),
+    optimizer = optim.Adam. Activation function hidden layer = ReLU and output
+    layer = Softmax. This function will print out the train and validation loss,
+    followed by saving the model to rebuild for prediction or further training. 
     Parameters:    
-    1. arch (str): The CNN architecture
-    2. learning_rate(float): The a tuning parameter 
-    3. hidden_layer (int): The number of hidden units
-    4. epochs (int): Number of iterations     
+    1. arch (str): The CNN architecture with default value 'vgg13' 
+    2. hidden_layer (int): The number of hidden units with default value '512'
+    3. learning_rate (float): The a tuning parameter with default value '0.01'
+    4. epochs (int): Number of iterations with default value '1'.
+    
     Returns:
     None - simply printing results.
     """
+
     # Measures total program runtime by collecting start time
     start_time = time()
-    
-    # retrieves command line arguments
-    in_arg = get_args()
-    
-#   assign variable to user input arguments 
-    epochs = in_arg.epochs
-       
+     
     # Build model
     print('Building model...')
-    model, criterion, optimizer, device, arch = classifier(in_arg.arch, in_arg.learning_rate, in_arg.hidden_units)
+
+    # Use GPU if it's available
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    # model selection
+    if arch == 'alexnet':
+        model = models.__dict__[arch](pretrained=True)
+        input_layer = 9216
+        output_layer = 102
+
+    elif arch == 'vgg16':
+        model = models.__dict__[arch](pretrained=True)
+        input_layer = 25088
+        output_layer = 102
+
+    elif arch == 'vgg13':
+        model = models.__dict__[arch](pretrained=True)
+        input_layer = 25088
+        output_layer = 102
+
+    # Freeze parameters so we don't backprop through them
+    for param in model.parameters():
+        param.requires_grad = False
+
+        model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
+                                   nn.ReLU(),
+                                   nn.Dropout(p=0.2),
+                                   nn.Linear(hidden_layer, output_layer),
+                                   nn.LogSoftmax(dim=1))                                   
+          
+    criterion = nn.NLLLoss()
+
+    # Only train the classifier parameters, feature parameters are frozen
+    optimizer = optim.Adam(model.classifier.parameters(), lr=learning_rate)    
     
+    model.to(device)
+    
+      
     # load transformed datasets
     print('Transforming datatsets...')
     train_data, valid_data, test_data, trainloader, validloader, testloader = tf_loader()
 
     # train model
     print('Training begin...') 
-    for epoch in range(epochs=1):
+    for epoch in range(epochs):
         for inputs, labels in trainloader:
             # Move input and label tensors to the default device
             inputs, labels = inputs.to(device), labels.to(device)
@@ -122,9 +162,5 @@ def main():
 
     return
 
-# Call to main function to run the program
-if __name__ == "__main__":
-    main()
-
-
+train(in_arg.arch, in_arg.hidden_units, in_arg.learning_rate, in_arg.epochs)
 
