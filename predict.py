@@ -19,7 +19,6 @@ from PIL import Image
 import numpy
 
 from get_args import get_args
-from classifier import classifier
 from process_dataset import process_image
 from process_dataset import load_cat_name
 
@@ -47,7 +46,7 @@ def predict(checkpoint='checkpoint.pth', topk=3, category_names='cat_to_name.jso
     hidden_layer = checkpoint['hidden_layer']
     output_layer = checkpoint['output_size']
     arch = checkpoint['arch']                          
-    model = models.arch(pretrained=True)
+    model = models.__dict__[arch](pretrained=True)
     for param in model.parameters():
         param.requires_grad = False
     model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
