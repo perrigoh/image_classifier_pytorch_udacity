@@ -2,7 +2,7 @@
 
 # PROGRAMMER: Perri Goh
 # DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 26 Oct 2022
+# REVISED DATE: 30 Oct 2022
 #
 
 # Imports python modules
@@ -45,18 +45,21 @@ def predict(checkpoint='checkpoint.pth', topk=3, category_names='cat_to_name.jso
     input_layer = checkpoint['input_size']
     hidden_layer = checkpoint['hidden_layer']
     output_layer = checkpoint['output_size']
-    arch = checkpoint['arch']                          
-    model = models.__dict__[arch](pretrained=True)
+    arch = checkpoint['arch']                  
+    model = models.__dict__[arch](weights=None)
+
+    # Freeze parameters so we don't backprop through them
     for param in model.parameters():
         param.requires_grad = False
+
     model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
-                                     nn.ReLU(),
-                                     nn.Dropout(p=0.2),
-                                     nn.Linear(hidden_layer, output_layer),
-                                     nn.LogSoftmax(dim=1))                                   
+                                    nn.ReLU(),
+                                    nn.Dropout(p=0.2),
+                                    nn.Linear(hidden_layer, output_layer),
+                                    nn.LogSoftmax(dim=1))                                   
     model.load_state_dict(checkpoint['model_state_dict'])
     model.class_to_idx = checkpoint['class_to_idx']
-    
+
     model.to(device)
     # load cat_to_name.json for mapping categories to actual flowers name
     cat_to_name = load_cat_name(category_names)

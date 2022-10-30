@@ -2,7 +2,7 @@
 
 # PROGRAMMER: Perri Goh
 # DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 28 Oct 2022
+# REVISED DATE: 30 Oct 2022
 # 
 
 
@@ -54,17 +54,20 @@ def train(arch='vgg13', hidden_layer=512, learning_rate=0.01, epochs=1):
 
     # model selection
     if arch == 'alexnet':
-        model = models.__dict__[arch](pretrained=True)
+        weights = models.AlexNet_Weights.DEFAULT
+        model = models.__dict__[arch](weights=weights)
         input_layer = 9216
         output_layer = 102
 
     elif arch == 'vgg16':
-        model = models.__dict__[arch](pretrained=True)
+        weights = models.VGG16_Weights.DEFAULT
+        model = models.__dict__[arch](weights=weights)
         input_layer = 25088
         output_layer = 102
 
     elif arch == 'vgg13':
-        model = models.__dict__[arch](pretrained=True)
+        weights = models.VGG13_Weights.DEFAULT
+        model = models.__dict__[arch](weights=weights)
         input_layer = 25088
         output_layer = 102
 
@@ -72,11 +75,11 @@ def train(arch='vgg13', hidden_layer=512, learning_rate=0.01, epochs=1):
     for param in model.parameters():
         param.requires_grad = False
 
-        model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
-                                   nn.ReLU(),
-                                   nn.Dropout(p=0.2),
-                                   nn.Linear(hidden_layer, output_layer),
-                                   nn.LogSoftmax(dim=1))                                   
+    model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
+                                nn.ReLU(),
+                                nn.Dropout(p=0.2),
+                                nn.Linear(hidden_layer, output_layer),
+                                nn.LogSoftmax(dim=1))                                   
           
     criterion = nn.NLLLoss()
 
@@ -143,6 +146,7 @@ def train(arch='vgg13', hidden_layer=512, learning_rate=0.01, epochs=1):
                 'input_size': model.classifier[0].in_features,
                 'output_size': model.classifier[3].out_features,           
                 'hidden_layer': model.classifier[0].out_features,
+                'weights': weights,
                 'arch': arch,
                 'epochs': epochs,
                 'class_to_idx': model.class_to_idx}
