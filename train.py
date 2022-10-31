@@ -68,15 +68,15 @@ def train(arch='vgg13', hidden_layer=512, learning_rate=0.01, epochs=1):
         input_layer = 25088
         output_layer = 102
 
-    # Freeze parameters so we don't backprop through them
-    for param in model.parameters():
-        param.requires_grad = False
+        # Freeze parameters so we don't backprop through them
+        for param in model.parameters():
+            param.requires_grad = False
 
-        model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
-                                   nn.ReLU(),
-                                   nn.Dropout(p=0.2),
-                                   nn.Linear(hidden_layer, output_layer),
-                                   nn.LogSoftmax(dim=1))                                   
+            model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
+                                        nn.ReLU(),
+                                        nn.Dropout(p=0.2),
+                                        nn.Linear(hidden_layer, output_layer),
+                                        nn.LogSoftmax(dim=1))                                   
           
     criterion = nn.NLLLoss()
 

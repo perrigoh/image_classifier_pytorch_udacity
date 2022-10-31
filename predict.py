@@ -49,11 +49,11 @@ def predict(checkpoint='checkpoint.pth', topk=3, category_names='cat_to_name.jso
     model = models.__dict__[arch](pretrained=True)
     for param in model.parameters():
         param.requires_grad = False
-    model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
-                                     nn.ReLU(),
-                                     nn.Dropout(p=0.2),
-                                     nn.Linear(hidden_layer, output_layer),
-                                     nn.LogSoftmax(dim=1))                                   
+        model.classifier = nn.Sequential(nn.Linear(input_layer, hidden_layer),
+                                        nn.ReLU(),
+                                        nn.Dropout(p=0.2),
+                                        nn.Linear(hidden_layer, output_layer),
+                                        nn.LogSoftmax(dim=1))                                   
     model.load_state_dict(checkpoint['model_state_dict'])
     model.class_to_idx = checkpoint['class_to_idx']
     
