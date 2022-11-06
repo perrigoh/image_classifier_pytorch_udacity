@@ -1,9 +1,5 @@
-# /aipnd-project/train.py - Completed
-
-# PROGRAMMER: Perri Goh
-# DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 28 Oct 2022
-# 
+#!/usr/bin/env python3
+#-----------------------50-----------------------|----------72---------|--79--|
 
 
 # Imports python modules

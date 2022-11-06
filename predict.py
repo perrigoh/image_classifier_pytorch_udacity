@@ -1,9 +1,5 @@
-# /aipnd-project/predict.py Completed
-
-# PROGRAMMER: Perri Goh
-# DATE CREATED: 11 Oct 2022                                  
-# REVISED DATE: 26 Oct 2022
-#
+#!/usr/bin/env python3
+#-----------------------50-----------------------|----------72---------|--79--|
 
 # Imports python modules
 import torch

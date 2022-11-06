@@ -1,9 +1,5 @@
-# /aipnd-project/get_arg.py - Completed
-# 
-# PROGRAMMER: Perri Goh
-# DATE CREATED: 4 Oct 2022                                  
-# REVISED DATE: 29 Oct 2022
-#-----------------------50-----------------------|----------72---------| 
+#!/usr/bin/env python3
+#-----------------------50-----------------------|----------72---------|--79--|
 
 # Imports python module
 import argparse
