@@ -53,7 +53,7 @@ python3 predict.py --topk 5
 Alternatively, use Image Classifier Project-test20.ipynb to train and predict in one file.
 
 
-## License
-
+## License  
+![MIT](https://img.shields.io/github/license/perrigoh/image_classifier_pytorch_udacity)  
 MIT License
 
