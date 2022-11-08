@@ -1,4 +1,4 @@
-# AI Programming with Python Project
+# [AI Programming with Python Project](https://github.com/udacity/aipnd-project)
 
 Project code for Udacity's AI Programming with Python Nanodegree program. In this project, students first develop code for an image classifier built with PyTorch, then convert it into a command line application.
 
@@ -7,13 +7,13 @@ Project code for Udacity's AI Programming with Python Nanodegree program. In thi
 
 ## Installation
 
-* PyTorch (refer [Pytorch website](https://pytorch.org/get-started/locally/))
 * Python version 3.7 or later
+* PyTorch (refer [Pytorch website](https://pytorch.org/get-started/locally/))
 * Jupyter Notebook
-* Numpy
-* Pillow
 * Matplotlib
 * Matplotlib-inline
+* Numpy
+* Pillow
 
 
 ## Dataset
@@ -53,7 +53,7 @@ python3 predict.py --topk 5
 Alternatively, use Image Classifier Project-test20.ipynb to train and predict in one file.
 
 
-## License
-
+## License  
+![MIT](https://img.shields.io/github/license/perrigoh/image_classifier_pytorch_udacity)  
 MIT License
 
